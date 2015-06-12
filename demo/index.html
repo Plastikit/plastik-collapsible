@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>plastik-collapsible demo</title>
+  
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro" />
+    <link rel="import" href="../../polymer/polymer.html" />
+    <link rel="import" href="../../paper-styles/paper-styles.html" />
+    <link rel="import" href="../plastik-collapsible.html" />
+        
+    <style is="custom-style">
+        html {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body, paper-item {
+            font: normal normal 400 14px RobotoDraft,Roboto,'Helvetica Neue',Helvetica,Arial,sans-serif;
+        }
+        
+        body {
+            background: #eee;
+            margin: 0;
+            padding: 8px 0;
+        }
+        
+        @media (max-width: 816px) {
+            body {
+                padding: 0;
+            }
+        }
+        
+        .container {
+            margin: auto;
+            max-width: 800px;
+            background: #fafafa;
+            box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 16px;
+        }
+      
+        h2 {
+            font-size: 24px;
+            font-weight: 300;
+        }
+        
+        h3 {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        hr {
+            border: none;
+            height: 1px;
+            background: rgba(0, 0, 0, .12);
+        }
+        
+        p, .nothing {
+            color: rgba(0, 0, 0, .54);
+        }
+        
+        html, body, p span {
+            color: rgba(0, 0, 0, .87);
+        }
+        
+        pre {
+            padding: 16px;
+            max-width: 832px;
+            white-space: pre-wrap;
+            font: normal normal 400 14px/16px 'Source Code Pro',Monaco,Menlo,Consolas,'Courier New',monospace;
+            background: #f5f5f5;
+        }
+        
+        .item-content {
+            padding: 16px;
+        }
+        
+        .item-header {
+            padding: 0 16px;
+        }
+        
+        .item-header {
+            height: 48px;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+            font-size: 18px;
+        }
+        
+        .item-content {
+            font-size: 16px;
+            line-height: 18px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <template id="t" is="dom-bind">
+        
+        <div class="container">
+            
+        <h2>&lt;plastik-collapsible&gt; demo</h2>
+        
+        <hr>
+    
+        <h3>Single selection:</h3>
+    
+        <plastik-collapsible selected="{{selected1}}">
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+        </plastik-collapsible>
+        
+        <p>Selected <span class$="[[getSelectedStyle(selected1)]]">[[displaySelected(selected1)]]</span>.</p>
+        
+        <hr />
+    
+        <h3>Multi selection:</h3>
+    
+        <plastik-collapsible multi selected-values="{{selected2}}">
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+            <div class="collapsible-item">
+                <div class="item-header">
+                    Header
+                </div>
+                <div class="item-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat est,
+                    ornare vitae feugiat et, viverra id risus. Mauris at odio euismod, suscipit
+                    turpis non, sollicitudin ipsum. Nam et augue et quam semper tempus et sed dui.
+                    Etiam eu neque leo. Ut imperdiet elit in efficitur luctus. Mauris vitae arcu
+                    risus. Donec ac tristique libero. Pellentesque gravida facilisis lobortis. In
+                    sit amet sem arcu. Maecenas ultrices magna in tellus egestas, eget mattis dolor
+                    euismod. Maecenas pretium, metus malesuada ultrices ullamcorper, odio neque
+                    convallis massa, rhoncus consectetur enim est nec lacus. Phasellus congue orci
+                    vitae tellus pulvinar feugiat. Sed augue risus, faucibus nec dolor a, hendrerit
+                    sagittis velit. Nullam id lacus vitae nisl vulputate egestas non nec turpis.
+                    Duis hendrerit egestas lorem, vel blandit enim.
+                </div>
+            </div>
+        </plastik-collapsible>
+        
+        <p>Selected <span class$="[[getSelectedStyle(selected2.*)]]">[[displaySelected(selected2.*)]]</span>.</p>
+            
+    </template>
+
+    <script>
+        "use strict";
+        
+        var template = document.querySelector('#t');
+        
+        template.displaySelected = function (selected) {
+            selected = selected && (typeof selected.base !== 'undefined' ? selected.base : selected);
+            if (Array.isArray(selected) && selected.length > 0) {
+                return selected.join(', ');
+            } else if (!Array.isArray(selected) && selected !== undefined && selected != null) {
+                return selected;
+            } else {
+                return 'nothing';
+            }
+        };
+        
+        template.getSelectedStyle = function (selected) {
+            return this.displaySelected(selected) === 'nothing' ? 'nothing' : '';
+        }
+        
+        window.addEventListener('WebComponentsReady', function(e) {
+            template.selected1 = template.selected2 = null;
+        });
+    </script>
+</body>
+</html>

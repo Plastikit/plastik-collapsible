@@ -1,0 +1,323 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-selector/iron-multi-selectable.html">
+
+<!--
+`plastik-collapsible` is a list of collapsible and expandable items. It extends
+`iron-selector`, and thus supports the same functionality, with the exception of
+the ability to change the `selectable` attribute.
+
+Items must be tagged with the `.collapsible-item` class, and must have two
+children: an `.item-header` and an `.item-content`.
+
+`plastik-collapsible` is minimally styled and therefore must have styles applied
+to it. The element will only give itself borders between and around items, style
+backgrounds, and style the element's overall layout.
+
+Additionally, `plastik-collapsible` does not require explicitly defined knowledge
+of the header heights and will calculate them automatically and individually.
+
+All of this was done to allow for ample flexibility.
+
+### Example
+
+```html
+    <plastik-collapsible>
+      <div class="collapsible-item">
+        <div class="item-header">Header</div>
+        <div class="item-content">
+          ...
+        </div>
+      </div>
+      <div class="collapsible-item">
+        <div class="item-header">Header</div>
+        <div class="item-content">
+          ...
+        </div>
+      </div>
+    </plastik-collapsible>
+```
+
+## Multi-selection
+
+Just like `iron-selector`, `plastik-collapsible` supports multi-selection. When
+multi-selection is enabled, more than one item can be expanded at a time. Simply
+add the `multi` attribute or set the `multi` property to true.
+
+### Example
+
+```html
+    <plastik-collapsible multi>
+      <div class="collapsible-item">
+        <div class="item-header">Header</div>
+        <div class="item-content">
+          ...
+        </div>
+      </div>
+      <div class="collapsible-item">
+        <div class="item-header">Header</div>
+        <div class="item-content">
+          ...
+        </div>
+      </div>
+    </plastik-collapsible>
+```
+ 
+## Styling
+
+`plastik-collapsible` applies the `.item-expanded` CSS class by default to any
+items which have been expanded. Collapsed items do not have any special class
+applied to them.
+
+### Example
+
+```html
+    <dom-module id="my-custom-element">
+      <style>
+        :host {
+          .item-expanded {
+            background-color: #B3E5FC;
+            color: #000;
+          };
+        }
+      </style>
+      
+      <template>
+        <plastik-collapsible multi>
+          <div class="collapsible-item">
+            <div class="item-header">Header</div>
+            <div class="item-content">
+              ...
+            </div>
+          </div>
+          <div class="collapsible-item">
+            <div class="item-header">Header</div>
+            <div class="item-content">
+              ...
+            </div>
+          </div>
+        </plastik-collapsible>
+      ...
+```
+
+Be aware that because `plastik-collapsible` does not rely on statically supplied
+header heights, and instead calculates them when items are collapsed or expanded,
+that if you change any style or content such that it affects an item's height,
+you must call `updateCollapseStyles()` to recalculate the heights appropriately.
+If the change only affects an individual item, you can call
+`updateCollapseStyles(value)` with the value (or index, if attrForSelected is
+unspecified) of the specific item in question.
+
+@group UI Elements
+@element plastik-collapsible
+@demo demo/index.html
+-->
+<dom-module id="plastik-collapsible">
+
+  <style is="custom-style">
+    :host, ::content .item-header {
+      display: -webkit-flex;
+      display: flex;
+    }
+    
+    :host {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+    
+    ::content .item-header {
+      background: #fff;
+    }
+    
+    ::content .collapsible-item {
+      border-bottom: 1px solid #ddd;
+    }
+    
+    ::content .collapsible-item:first-of-type {
+      border-top: 1px solid #ddd;
+    }
+    
+    ::content .collapsible-item {
+      outline: none;
+      overflow: hidden;
+      background: #fafafa;
+      transition: height ease-in-out .38s;
+    }
+    
+    ::content .item-header {
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      outline: none;
+    }
+    
+    ::content .item-header:focus, ::content .item-header:hover {
+      background: #eee;
+    }
+  </style>
+
+  <template>
+    <content></content>
+  </template>
+  
+  <script>
+    Polymer({
+      is: 'plastik-collapsible',
+      
+      behaviors: [
+        Polymer.IronMultiSelectableBehavior
+      ],
+      
+      properties: {
+        /**
+         * The CSS selector that matches collapsible items. This property can
+         * not be changed.
+         *
+         * @attribute selectable
+         * @type {string}
+         */
+        selectable: {
+          type: String,
+          readOnly: true,
+          value: '.collapsible-item'
+        },
+        /**
+         * Gets or sets the CSS selector that matches collapsible items which
+         * have been expanded.
+         *
+         * @attribute selectedClass
+         * @type {string}
+         */
+        selectedClass: {
+          type: String,
+          value: 'item-expanded'
+        }
+      },
+      
+      listeners: {
+        'iron-select': '_itemSelected',
+        'iron-deselect': '_itemDeselected'
+      },
+      
+      /**
+       * Expands or collapses the item with the given value, as appropriate.
+       *
+       * @method select
+       * @param {*} value The value of the item to select.
+       */
+      select: function (value) {
+        if (!this.multi && this.selected === value) {
+          this.selected = null;
+        } else {
+          Polymer.IronMultiSelectableBehaviorImpl.select.call(this, value);
+        }
+      },
+      
+      /**
+       * Iterates through all the items (or the item which value matches the one
+       * given) and sets their height to the appropriate size based on whether or
+       * not they are supposed to be expanded or collapsed.
+       * 
+       * Use this if you change any CSS or styling that would affect the sizes of
+       * the items.
+       *
+       * @method select
+       * @param {*} value (optional) The value of the item of which style to update.
+       */
+      updateCollapseStyles: function (value) {
+        if (typeof value !== 'undefined') {
+          var item = this._valueToItem(value);
+          if (item) {
+            if (item.classList.contains(this.selectedClass)) {
+              item.style.height = this._getExpandedItemHeight(item);
+            } else {
+              item.style.height = this._getItemHeaderHeight(item);
+            }
+          }
+        } else {
+          for (var i = 0; i < this.items.length; i++) {
+            if (this.items[i].classList.contains(this.selectedClass)) {
+              this.items[i].style.height = this._getExpandedItemHeight(this.items[i]);
+            } else {
+              this.items[i].style.height = this._getItemHeaderHeight(this.items[i]);
+            }
+          }
+        }
+      },
+      
+      _useScopeSelector: undefined,
+      
+      _activateHandler: function(e) {
+        var t = e.target;
+        var items = this.items;
+        while (t && t != this) {
+          if (t.classList.contains('item-content') &&
+              t.parentNode.classList.contains('collapsible-item')) {
+            return;
+          }
+          var i = items.indexOf(t);
+          if (i >= 0) {
+            var value = this._indexToValue(i);
+            this._itemActivate(value, t);
+            return;
+          }
+          t = t.parentNode;
+        }
+      },
+      
+      _itemSelected: function (e) {
+        e.detail.item.style.height = this._getExpandedItemHeight(e.detail.item);
+      },
+      
+      _itemDeselected: function (e) {
+        e.detail.item.style.height = this._getItemHeaderHeight(e.detail.item);
+      },
+      
+      ready: function () {
+        this._useScopeSelector = ((window.Plastikit || (window.Plastikit = {}))
+          .supported || (window.Plastikit.supported = {})).scopeSelector;
+        if (typeof this._useScopeSelector === 'undefined') {
+          var elem = document.createElement('div');
+          elem.appendChild(document.createElement('span'));
+          this._useScopeSelector = window.Plastikit.supported.scopeSelector = 
+            elem.querySelector(':scope > span') ? true : false;
+        }
+      },
+      
+      attached: function () {
+        this.updateCollapseStyles();
+      },
+      
+      _getItemHeaderHeight: function (item) {
+        var itemHeader;
+        for (var i = 0; i < item.childNodes.length; i++) {
+          if (item.childNodes[i].nodeType !== 1) {
+            continue;
+          }
+          if (item.childNodes[i].classList.contains('item-header')) {
+            itemHeader = item.childNodes[i];
+            break;
+          }
+        }
+        return itemHeader.offsetHeight + 'px';
+      },
+      
+      _getExpandedItemHeight: function (item) {
+        var itemHeader, itemContent;
+        for (var i = 0; i < item.childNodes.length; i++) {
+          if (item.childNodes[i].nodeType !== 1) {
+            continue;
+          }
+          if (item.childNodes[i].classList.contains('item-header')) {
+            itemHeader = item.childNodes[i];
+          } else if (item.childNodes[i].classList.contains('item-content')) {
+            itemContent = item.childNodes[i];
+          }
+          if (itemHeader && itemContent) {
+            break;
+          }
+        }
+        return itemHeader.offsetHeight + itemContent.offsetHeight + 'px';
+      }
+    });
+  </script>
+</dom-module>

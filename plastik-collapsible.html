@@ -278,8 +278,12 @@ unspecified) of the specific item in question.
         if (typeof this._useScopeSelector === 'undefined') {
           var elem = document.createElement('div');
           elem.appendChild(document.createElement('span'));
+          try {
           this._useScopeSelector = window.Plastikit.supported.scopeSelector = 
             elem.querySelector(':scope > span') ? true : false;
+          } catch (err) {
+            this._useScopeSelector = window.Plastikit.supported.scopeSelector = false;
+          }
         }
       },
       
@@ -289,13 +293,17 @@ unspecified) of the specific item in question.
       
       _getItemHeaderHeight: function (item) {
         var itemHeader;
-        for (var i = 0; i < item.childNodes.length; i++) {
-          if (item.childNodes[i].nodeType !== 1) {
-            continue;
-          }
-          if (item.childNodes[i].classList.contains('item-header')) {
-            itemHeader = item.childNodes[i];
-            break;
+        if (this._useScopeSelector) {
+          itemHeader = item.querySelector(':scope > .item-header');
+        } else {
+          for (var i = 0; i < item.childNodes.length; i++) {
+            if (item.childNodes[i].nodeType !== 1) {
+              continue;
+            }
+            if (item.childNodes[i].classList.contains('item-header')) {
+              itemHeader = item.childNodes[i];
+              break;
+            }
           }
         }
         return itemHeader.offsetHeight + 'px';
@@ -303,17 +311,22 @@ unspecified) of the specific item in question.
       
       _getExpandedItemHeight: function (item) {
         var itemHeader, itemContent;
-        for (var i = 0; i < item.childNodes.length; i++) {
-          if (item.childNodes[i].nodeType !== 1) {
-            continue;
-          }
-          if (item.childNodes[i].classList.contains('item-header')) {
-            itemHeader = item.childNodes[i];
-          } else if (item.childNodes[i].classList.contains('item-content')) {
-            itemContent = item.childNodes[i];
-          }
-          if (itemHeader && itemContent) {
-            break;
+        if (this._useScopeSelector) {
+          itemHeader = item.querySelector(':scope > .item-header');
+          itemContent = item.querySelector(':scope > .item-content');
+        } else {
+          for (var i = 0; i < item.childNodes.length; i++) {
+            if (item.childNodes[i].nodeType !== 1) {
+              continue;
+            }
+            if (item.childNodes[i].classList.contains('item-header')) {
+              itemHeader = item.childNodes[i];
+            } else if (item.childNodes[i].classList.contains('item-content')) {
+              itemContent = item.childNodes[i];
+            }
+            if (itemHeader && itemContent) {
+              break;
+            }
           }
         }
         return itemHeader.offsetHeight + itemContent.offsetHeight + 'px';

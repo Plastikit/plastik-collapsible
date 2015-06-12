@@ -5,18 +5,6 @@ plastik-collapsible
 `iron-selector`, and thus supports the same functionality, with the exception of
 the ability to change the `selectable` attribute.
 
-Items must be tagged with the `.collapsible-item` class, and must have two
-children: an `.item-header` and an `.item-content`.
-
-`plastik-collapsible` is minimally styled and therefore must have styles applied
-to it. The element will only give itself borders between and around items, style
-backgrounds, and style the element's overall layout.
-
-Additionally, `plastik-collapsible` does not require explicitly defined knowledge
-of the header heights and will calculate them automatically and individually.
-
-All of this was done to allow for ample flexibility.
-
 Demos and documentation are available on the 
 [component page](https://www.plastikit.org/1.x/components/plastik-collapsible/).
 
@@ -32,10 +20,6 @@ bower install Plastikit/plastik-collapsible --save
 
  > _See [component page](https://www.plastikit.org/1.x/components/plastik-collapsible/)
  > for more details._
-
-`plastik-collapsible` is a list of collapsible and expandable items. It extends
-`iron-selector`, and thus supports the same functionality, with the exception of
-the ability to change the `selectable` attribute.
 
 Items must be tagged with the `.collapsible-item` class, and must have two
 children: an `.item-header` and an `.item-content`.

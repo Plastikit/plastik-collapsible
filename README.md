@@ -6,7 +6,7 @@ plastik-collapsible
 the ability to change the `selectable` attribute.
 
 Demos and documentation are available on the 
-[component page](https://www.plastikit.org/1.x/components/plastik-collapsible/).
+[component page](http://www.plastikit.org/1.x/#!/components/plastik-collapsible).
 
 Pull requests are always welcome. If you encounter any bugs, please feel free to
 [submit an issue](https://github.com/Plastikit/plastik-collapsible/issues/new/).
@@ -18,7 +18,7 @@ bower install Plastikit/plastik-collapsible --save
 ```
 ## Basic usage
 
- > _See [component page](https://www.plastikit.org/1.x/components/plastik-collapsible/)
+ > _See [component page](http://www.plastikit.org/1.x/#!/components/plastik-collapsible)
  > for more details._
 
 Items must be tagged with the `.collapsible-item` class, and must have two

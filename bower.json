@@ -2,7 +2,7 @@
   "name": "plastik-collapsible",
   "version": "0.0.3",
   "authors": [
-    "The Plastikit Authors <developers@plastikit.org>"
+    "The Plastikit Project Authors <developers@plastikit.org>"
   ],
   "description": "List of collapsible and expandable items.",
   "keywords": [

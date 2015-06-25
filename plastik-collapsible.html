@@ -264,6 +264,23 @@ unspecified) of the specific item in question.
         }
       },
       
+      // Overloading IronSelectableBehavior's _observeItems
+      // to update the collapsed/expanded item styles whenever
+      // the DOM is mutated.
+      _observeItems: function(node) {
+        var observer = new MutationObserver(function() {
+          if (this.selected != null) {
+            this._updateSelected();
+          }
+          this.updateCollapseStyles();
+        }.bind(this));
+        observer.observe(node, {
+          childList: true,
+          subtree: true
+        });
+        return observer;
+      },
+      
       _itemSelected: function (e) {
         e.detail.item.style.height = this._getExpandedItemHeight(e.detail.item);
       },
